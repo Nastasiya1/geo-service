@@ -60,6 +60,6 @@ class MessageSenderImplTest {
         Mockito.when(geoService.byIp(testIP)).thenReturn(testLocation);
         Mockito.when(localizationService.locale(testLocation.getCountry())).thenReturn(testMessage);
 
-        Assertions.assertEquals("Welcome", messageSenderпше .send(testHeaders));
+        Assertions.assertEquals("Welcome", messageSender.send(testHeaders));
     }
 }
