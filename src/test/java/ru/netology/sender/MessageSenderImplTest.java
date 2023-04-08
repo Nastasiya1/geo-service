@@ -6,7 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import ru.netology.entity.Country;
 import ru.netology.entity.Location;
+import ru.netology.geo.GeoService;
 import ru.netology.geo.GeoServiceImpl;
+import ru.netology.i18n.LocalizationService;
 import ru.netology.i18n.LocalizationServiceImpl;
 
 import java.util.HashMap;
@@ -15,16 +17,16 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MessageSenderImplTest {
-    MessageSenderImpl messageSenderImpl;
-    GeoServiceImpl geoServiceImpl;
-    LocalizationServiceImpl localizationServiceImpl;
+    MessageSender messageSender;
+    GeoService geoService;
+    LocalizationService localizationService;
 
 
     @BeforeEach
     void init() {
-        geoServiceImpl = Mockito.mock(GeoServiceImpl.class);
-        localizationServiceImpl = Mockito.mock(LocalizationServiceImpl.class);
-        messageSenderImpl = new MessageSenderImpl(geoServiceImpl, localizationServiceImpl);
+        geoService = Mockito.mock(GeoService.class);
+        localizationService = Mockito.mock(LocalizationService.class);
+        messageSender = new MessageSenderImpl(geoService, localizationService);
     }
 
     @Test
@@ -38,10 +40,10 @@ class MessageSenderImplTest {
 
         String testMessage = "Добро пожаловать";
 
-        Mockito.when(geoServiceImpl.byIp(testIP)).thenReturn(testLocation);
-        Mockito.when(localizationServiceImpl.locale(testLocation.getCountry())).thenReturn(testMessage);
+        Mockito.when(geoService.byIp(testIP)).thenReturn(testLocation);
+        Mockito.when(localizationService.locale(testLocation.getCountry())).thenReturn(testMessage);
 
-        Assertions.assertEquals("Добро пожаловать", messageSenderImpl.send(testHeaders));
+        Assertions.assertEquals("Добро пожаловать", messageSender.send(testHeaders));
     }
 
     @Test
@@ -55,9 +57,9 @@ class MessageSenderImplTest {
 
         String testMessage = "Welcome";
 
-        Mockito.when(geoServiceImpl.byIp(testIP)).thenReturn(testLocation);
-        Mockito.when(localizationServiceImpl.locale(testLocation.getCountry())).thenReturn(testMessage);
+        Mockito.when(geoService.byIp(testIP)).thenReturn(testLocation);
+        Mockito.when(localizationService.locale(testLocation.getCountry())).thenReturn(testMessage);
 
-        Assertions.assertEquals("Welcome", messageSenderImpl.send(testHeaders));
+        Assertions.assertEquals("Welcome", messageSenderпше .send(testHeaders));
     }
 }

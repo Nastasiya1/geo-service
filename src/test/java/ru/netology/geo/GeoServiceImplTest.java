@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GeoServiceImplTest {
 
-    GeoServiceImpl geoService = new GeoServiceImpl();
+    GeoService geoService = new GeoServiceImpl();
 
     @Test
     void RussiaByIpTest() {
